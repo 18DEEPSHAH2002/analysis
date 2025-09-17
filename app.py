@@ -13,7 +13,7 @@ st.set_page_config(
 
 # --- Gemini API Configuration ---
 # NOTE: It's best practice to use st.secrets for your API key
-API_KEY = st.secrets.get("GEMINI_API_KEY", "") 
+API_KEY = st.secrets.get("AIzaSyC4CvDL1M7ykzWBU953xk6ku6clC2zHzbQ", "") 
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={API_KEY}"
 
 # --- Backend Functions ---
