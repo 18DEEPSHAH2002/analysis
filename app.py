@@ -12,8 +12,9 @@ st.set_page_config(
 )
 
 # --- Gemini API Configuration ---
-# NOTE: It's best practice to use st.secrets for your API key
-API_KEY = st.secrets.get("AIzaSyC4CvDL1M7ykzWBU953xk6ku6clC2zHzbQ", "") 
+# The API key is now hard-coded below.
+# Warning: For security, it's better to use st.secrets for any shared or public app.
+API_KEY = "AIzaSyC4CvDL1M7ykzWBU953xk6ku6clC2zHzbQ" 
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={API_KEY}"
 
 # --- Backend Functions ---
@@ -126,9 +127,12 @@ else:
                     st.subheader("🔑 Key Topics")
                     keywords = analysis_result.get("keywords", [])
                     if keywords:
-                        cols = st.columns(len(keywords))
+                        # Dynamically adjust columns based on number of keywords
+                        num_keywords = len(keywords)
+                        cols = st.columns(num_keywords if num_keywords > 0 else 1)
                         for i, keyword in enumerate(keywords):
-                            cols[i].info(keyword)
+                            with cols[i]:
+                                st.info(keyword)
                     else:
                         st.write("No keywords were extracted.")
                     
@@ -152,3 +156,4 @@ else:
 
             else:
                 st.warning("Could not extract enough text from the PDF. The document might be image-based, empty, or corrupted.")
+
